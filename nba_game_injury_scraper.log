@@ -1,0 +1,26 @@
+2025-07-21 17:39:07,014 - INFO - Testing with October 2018 games...
+2025-07-21 17:39:07,015 - INFO - Scraping games and injuries from 2018-10-16 to 2018-10-18
+2025-07-21 17:39:07,015 - INFO - Processing date: 2018-10-16
+2025-07-21 17:39:07,015 - INFO - Fetching games for 2018-10-16 using NBA API scoreboardv2
+2025-07-21 17:39:09,894 - ERROR - Error fetching games for 2018-10-16 00:00:00 using scoreboardv2: 'WinProbability'
+2025-07-21 17:39:09,896 - INFO - Using fallback method for season 2018-19, date 2018-10-16
+2025-07-21 17:39:11,113 - INFO - Trying injury report URL: https://ak-static.cms.nba.com/wp-content/uploads/sites/4/2018/10/Injury-Report-10.15.18-5.30.pdf
+2025-07-21 17:39:14,539 - INFO - Trying injury report URL: https://ak-static.cms.nba.com/wp-content/uploads/sites/4/2018/10/Injury-Report-10.15.18-1.00.pdf
+2025-07-21 17:39:17,715 - INFO - Trying injury report URL: https://ak-static.cms.nba.com/wp-content/uploads/sites/4/2018/10/injury-report-10.15.18.pdf
+2025-07-21 17:39:20,330 - INFO - Trying injury report URL: https://ak-static.cms.nba.com/wp-content/uploads/sites/4/2018/10/Injury-Report-10-15-2018-5.30.pdf
+2025-07-21 17:39:23,065 - INFO - Trying injury report URL: https://ak-static.cms.nba.com/wp-content/uploads/sites/4/2018/10/Injury-Report-10-15-2018-1.00.pdf
+2025-07-21 17:39:26,726 - INFO - Trying injury report URL: https://ak-static.cms.nba.com/wp-content/uploads/sites/4/2018/10/injury-report-10-15-2018.pdf
+2025-07-21 17:39:49,686 - INFO - Scraping games and injuries from 2018-10-16 to 2018-10-18
+2025-07-21 17:39:49,686 - INFO - Processing date: 2018-10-16
+2025-07-21 17:39:49,686 - INFO - Fetching games for 2018-10-16 using NBA API scoreboardv2
+2025-07-21 17:39:52,454 - ERROR - Error fetching games for 2018-10-16 00:00:00 using scoreboardv2: 'WinProbability'
+2025-07-21 17:39:52,455 - INFO - Using fallback method for season 2018-19, date 2018-10-16
+2025-07-21 17:39:52,554 - INFO - Trying injury report URL: https://ak-static.cms.nba.com/wp-content/uploads/sites/4/2018/10/Injury-Report-10.15.18-5.30.pdf
+2025-07-21 17:39:55,346 - INFO - Trying injury report URL: https://ak-static.cms.nba.com/wp-content/uploads/sites/4/2018/10/Injury-Report-10.15.18-1.00.pdf
+2025-07-21 17:39:58,487 - INFO - Trying injury report URL: https://ak-static.cms.nba.com/wp-content/uploads/sites/4/2018/10/injury-report-10.15.18.pdf
+2025-07-21 17:40:00,827 - INFO - Trying injury report URL: https://ak-static.cms.nba.com/wp-content/uploads/sites/4/2018/10/Injury-Report-10-15-2018-5.30.pdf
+2025-07-21 17:40:03,744 - INFO - Trying injury report URL: https://ak-static.cms.nba.com/wp-content/uploads/sites/4/2018/10/Injury-Report-10-15-2018-1.00.pdf
+2025-07-21 17:40:07,076 - INFO - Trying injury report URL: https://ak-static.cms.nba.com/wp-content/uploads/sites/4/2018/10/injury-report-10-15-2018.pdf
+2025-07-21 17:40:10,036 - INFO - Trying injury report URL: https://ak-static.cms.nba.com/wp-content/uploads/sites/4/2018/10/Injury-Report-2018-10-15-5.30.pdf
+2025-07-21 17:40:12,397 - INFO - Trying injury report URL: https://ak-static.cms.nba.com/wp-content/uploads/sites/4/2018/10/Injury-Report-2018-10-15-1.00.pdf
+2025-07-21 17:40:15,543 - INFO - Trying injury report URL: https://ak-static.cms.nba.com/wp-content/uploads/sites/4/2018/10/injury-report-2018-10-15.pdf

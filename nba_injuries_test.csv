@@ -1,0 +1,177 @@
+report_date,report_time,game_date,game_time,matchup,player_name,team,status
+2023-12-01,08PM,12/01/2023,07:00(ET),WAS@ORL,Ryan Rollins,Washington Wizards,Out
+2023-12-01,08PM,12/01/2023,07:00(ET),WAS@ORL,Delon Wright,Washington Wizards,Out
+2023-12-01,08PM,12/01/2023,07:00(ET),WAS@ORL,Paolo Banchero,Orlando Magic,Available
+2023-12-01,08PM,12/01/2023,07:00(ET),WAS@ORL,Wendell CarterJr.,Orlando Magic,Out
+2023-12-01,08PM,12/01/2023,07:00(ET),WAS@ORL,Markelle Fultz,Orlando Magic,Out
+2023-12-01,08PM,12/01/2023,07:00(ET),WAS@ORL,Kevon Harris,Orlando Magic,Out
+2023-12-01,08PM,12/01/2023,07:00(ET),WAS@ORL,Jett Howard,Orlando Magic,Available
+2023-12-01,08PM,12/01/2023,07:00(ET),WAS@ORL,Jonathan Isaac,Orlando Magic,Available
+2023-12-01,08PM,12/01/2023,07:00(ET),WAS@ORL,Trevelin Queen,Orlando Magic,Out
+2023-12-01,08PM,12/01/2023,07:30(ET),MEM@DAL,Steven Adams,Memphis Grizzlies,Out
+2023-12-01,08PM,12/01/2023,07:30(ET),MEM@DAL,Brandon Clarke,Memphis Grizzlies,Out
+2023-12-01,08PM,12/01/2023,07:30(ET),MEM@DAL,GG Jackson,Memphis Grizzlies,Out
+2023-12-01,08PM,12/01/2023,07:30(ET),MEM@DAL,Luke Kennard,Memphis Grizzlies,Out
+2023-12-01,08PM,12/01/2023,07:30(ET),MEM@DAL,Jake LaRavia,Memphis Grizzlies,Out
+2023-12-01,08PM,12/01/2023,07:30(ET),MEM@DAL,Ja Morant,Memphis Grizzlies,Out
+2023-12-01,08PM,12/01/2023,07:30(ET),MEM@DAL,Marcus Smart,Memphis Grizzlies,Out
+2023-12-01,08PM,12/01/2023,07:30(ET),MEM@DAL,Xavier Tillman,Memphis Grizzlies,Available
+2023-12-01,08PM,12/01/2023,07:30(ET),MEM@DAL,Greg BrownIII,Dallas Mavericks,Out
+2023-12-01,08PM,12/01/2023,07:30(ET),MEM@DAL,Luka Doncic,Dallas Mavericks,Out
+2023-12-01,08PM,12/01/2023,07:30(ET),MEM@DAL,Dante Exum,Dallas Mavericks,Out
+2023-12-01,08PM,12/01/2023,07:30(ET),MEM@DAL,Tim HardawayJr.,Dallas Mavericks,Out
+2023-12-01,08PM,12/01/2023,07:30(ET),MEM@DAL,Maxi Kleber,Dallas Mavericks,Out
+2023-12-01,08PM,12/01/2023,07:30(ET),MEM@DAL,Olivier-Maxence Prosper,Dallas Mavericks,Available
+2023-12-01,08PM,12/01/2023,07:30(ET),NYK@TOR,Charlie BrownJr.,New York Knicks,Out
+2023-12-01,08PM,12/01/2023,07:30(ET),NYK@TOR,Jaylen Martin,New York Knicks,Out
+2023-12-01,08PM,12/01/2023,07:30(ET),NYK@TOR,Julius Randle,New York Knicks,Available
+2023-12-01,08PM,12/01/2023,07:30(ET),NYK@TOR,Jacob Toppin,New York Knicks,Out
+2023-12-01,08PM,12/01/2023,07:30(ET),NYK@TOR,Dylan Windler,New York Knicks,Out
+2023-12-01,08PM,12/01/2023,07:30(ET),NYK@TOR,Gradey Dick,Toronto Raptors,Out
+2023-12-01,08PM,12/01/2023,07:30(ET),NYK@TOR,Javon Freeman-Liberty,Toronto Raptors,Out
+2023-12-01,08PM,12/01/2023,07:30(ET),NYK@TOR,Ron HarperJr.,Toronto Raptors,Out
+2023-12-01,08PM,12/01/2023,07:30(ET),NYK@TOR,Christian Koloko,Toronto Raptors,Out
+2023-12-01,08PM,12/01/2023,07:30(ET),NYK@TOR,Markquis Nowell,Toronto Raptors,Out
+2023-12-01,08PM,12/01/2023,07:30(ET),PHI@BOS,Nicolas Batum,Philadelphia 76ers,Out
+2023-12-01,08PM,12/01/2023,07:30(ET),PHI@BOS,Ricky CouncilIV,Philadelphia 76ers,Out
+2023-12-01,08PM,12/01/2023,07:30(ET),PHI@BOS,Joel Embiid,Philadelphia 76ers,Out
+2023-12-01,08PM,12/01/2023,07:30(ET),PHI@BOS,Danuel HouseJr.,Philadelphia 76ers,Out
+2023-12-01,08PM,12/01/2023,07:30(ET),PHI@BOS,Tyrese Maxey,Philadelphia 76ers,Out
+2023-12-01,08PM,12/01/2023,07:30(ET),PHI@BOS,Kelly OubreJr.,Philadelphia 76ers,Out
+2023-12-01,08PM,12/01/2023,07:30(ET),PHI@BOS,Javonte Smart,Philadelphia 76ers,Out
+2023-12-01,08PM,12/01/2023,07:30(ET),PHI@BOS,Terquavion Smith,Philadelphia 76ers,Out
+2023-12-01,08PM,12/01/2023,07:30(ET),PHI@BOS,Jaden Springer,Philadelphia 76ers,Available
+2023-12-01,08PM,12/01/2023,07:30(ET),PHI@BOS,JD Davison,Boston Celtics,Out
+2023-12-01,08PM,12/01/2023,07:30(ET),PHI@BOS,Nathan Knight,Boston Celtics,Out
+2023-12-01,08PM,12/01/2023,07:30(ET),PHI@BOS,Kristaps Porzingis,Boston Celtics,Out
+2023-12-01,08PM,12/01/2023,07:30(ET),PHI@BOS,Jordan Walsh,Boston Celtics,Out
+2023-12-01,08PM,12/01/2023,08:00(ET),SAS@NOP,Charles Bediako,San Antonio Spurs,Out
+2023-12-01,08PM,12/01/2023,08:00(ET),SAS@NOP,Sidy Cissoko,San Antonio Spurs,Out
+2023-12-01,08PM,12/01/2023,08:00(ET),SAS@NOP,Keldon Johnson,San Antonio Spurs,Available
+2023-12-01,08PM,12/01/2023,08:00(ET),SAS@NOP,Doug McDermott,San Antonio Spurs,Out
+2023-12-01,08PM,12/01/2023,08:00(ET),SAS@NOP,Sir'Jabari Rice,San Antonio Spurs,Out
+2023-12-01,08PM,12/01/2023,08:00(ET),SAS@NOP,Victor Wembanyama,San Antonio Spurs,Out
+2023-12-01,08PM,12/01/2023,08:00(ET),SAS@NOP,Jose Alvarado,New Orleans Pelicans,Out
+2023-12-01,08PM,12/01/2023,08:00(ET),SAS@NOP,Trey MurphyIII,New Orleans Pelicans,Available
+2023-12-01,08PM,12/01/2023,08:00(ET),SAS@NOP,Larry NanceJr.,New Orleans Pelicans,Out
+2023-12-01,08PM,12/01/2023,08:00(ET),SAS@NOP,Matt Ryan,New Orleans Pelicans,Out
+2023-12-01,08PM,12/01/2023,08:00(ET),SAS@NOP,Dereon Seabron,New Orleans Pelicans,Out
+2023-12-01,08PM,12/01/2023,10:00(ET),DEN@PHX,Vlatko Cancar,Denver Nuggets,Out
+2023-12-01,08PM,12/01/2023,10:00(ET),DEN@PHX,Aaron Gordon,Denver Nuggets,Questionable
+2023-12-01,08PM,12/01/2023,10:00(ET),DEN@PHX,Jay Huff,Denver Nuggets,Out
+2023-12-01,08PM,12/01/2023,10:00(ET),DEN@PHX,Jamal Murray,Denver Nuggets,Questionable
+2023-12-01,08PM,12/01/2023,10:00(ET),DEN@PHX,Jalen Pickett,Denver Nuggets,Out
+2023-12-01,08PM,12/01/2023,10:00(ET),DEN@PHX,Hunter Tyson,Denver Nuggets,Out
+2023-12-01,08PM,12/01/2023,10:00(ET),DEN@PHX,Peyton Watson,Denver Nuggets,Probable
+2023-12-01,08PM,12/01/2023,10:00(ET),DEN@PHX,Bradley Beal,Phoenix Suns,Out
+2023-12-01,08PM,12/01/2023,10:00(ET),DEN@PHX,Devin Booker,Phoenix Suns,Out
+2023-12-01,08PM,12/01/2023,10:00(ET),DEN@PHX,Damion Lee,Phoenix Suns,Out
+2023-12-01,08PM,12/02/2023,04:00(ET),GSW@LAC,Usman Garuba,Golden State Warriors,Out
+2023-12-01,08PM,12/02/2023,04:00(ET),GSW@LAC,Chris Paul,Golden State Warriors,Out
+2023-12-01,08PM,12/02/2023,04:00(ET),GSW@LAC,Gary PaytonII,Golden State Warriors,Out
+2023-12-01,08PM,12/02/2023,04:00(ET),GSW@LAC,Andrew Wiggins,Golden State Warriors,Questionable
+2023-12-01,08PM,12/02/2023,04:00(ET),GSW@LAC,Brandon BostonJr.,LA Clippers,Out
+2023-12-01,08PM,12/02/2023,04:00(ET),GSW@LAC,Mason Plumlee,LA Clippers,Out
+2023-12-01,08PM,12/01/2023,05:00(ET),MIN@CHA,Jaylen Clark,Minnesota Timberwolves,Out
+2023-12-01,08PM,12/01/2023,05:00(ET),MIN@CHA,Anthony Edwards,Minnesota Timberwolves,Doubtful
+2023-12-01,08PM,12/01/2023,05:00(ET),MIN@CHA,Jaden McDaniels,Minnesota Timberwolves,Out
+2023-12-01,08PM,12/01/2023,05:00(ET),MIN@CHA,Jordan McLaughlin,Minnesota Timberwolves,Out
+2023-12-01,08PM,12/01/2023,05:00(ET),MIN@CHA,Leonard Miller,Minnesota Timberwolves,Out
+2023-12-01,08PM,12/01/2023,05:00(ET),MIN@CHA,Amari Bailey,Charlotte Hornets,Out
+2023-12-01,08PM,12/01/2023,05:00(ET),MIN@CHA,LaMelo Ball,Charlotte Hornets,Out
+2023-12-01,08PM,12/01/2023,05:00(ET),MIN@CHA,Cody Martin,Charlotte Hornets,Out
+2023-12-01,08PM,12/01/2023,05:00(ET),MIN@CHA,Brandon Miller,Charlotte Hornets,Questionable
+2023-12-01,08PM,12/01/2023,05:00(ET),MIN@CHA,Frank Ntilikina,Charlotte Hornets,Out
+2023-12-01,08PM,12/01/2023,05:00(ET),MIN@CHA,Nick Richards,Charlotte Hornets,Questionable
+2023-12-01,08PM,12/01/2023,07:00(ET),CLE@DET,Emoni Bates,Cleveland Cavaliers,Out
+2023-12-01,08PM,12/01/2023,07:00(ET),CLE@DET,Ty Jerome,Cleveland Cavaliers,Out
+2023-12-01,08PM,12/01/2023,07:00(ET),CLE@DET,Caris LeVert,Cleveland Cavaliers,Out
+2023-12-01,08PM,12/01/2023,07:00(ET),CLE@DET,Isaiah Mobley,Cleveland Cavaliers,Out
+2023-12-01,08PM,12/01/2023,07:00(ET),CLE@DET,Ricky Rubio,Cleveland Cavaliers,Out
+2023-12-01,08PM,12/01/2023,07:00(ET),CLE@DET,Dean Wade,Cleveland Cavaliers,Out
+2023-12-01,08PM,12/01/2023,07:00(ET),CLE@DET,Bojan Bogdanovic,Detroit Pistons,Probable
+2023-12-01,08PM,12/01/2023,07:00(ET),CLE@DET,Malcolm Cazalon,Detroit Pistons,Out
+2023-12-01,08PM,12/01/2023,07:00(ET),CLE@DET,Joe Harris,Detroit Pistons,Out
+2023-12-01,08PM,12/01/2023,07:00(ET),CLE@DET,Monte Morris,Detroit Pistons,Out
+2023-12-01,08PM,12/01/2023,07:00(ET),CLE@DET,Jared Rhoden,Detroit Pistons,Out
+2023-12-01,08PM,12/01/2023,07:00(ET),CLE@DET,Ausar Thompson,Detroit Pistons,Probable
+2023-12-01,08PM,12/01/2023,07:00(ET),ORL@BKN,NOT YET SUBMITTED,Orlando Magic,NOT YET SUBMITTED
+2023-12-01,08PM,12/01/2023,07:00(ET),ORL@BKN,Armoni Brooks,Brooklyn Nets,Out
+2023-12-01,08PM,12/01/2023,07:00(ET),ORL@BKN,Noah Clowney,Brooklyn Nets,Out
+2023-12-01,08PM,12/01/2023,07:00(ET),ORL@BKN,Keon Johnson,Brooklyn Nets,Out
+2023-12-01,08PM,12/01/2023,07:00(ET),ORL@BKN,Ben Simmons,Brooklyn Nets,Out
+2023-12-01,08PM,12/01/2023,07:00(ET),ORL@BKN,Dennis SmithJr.,Brooklyn Nets,Probable
+2023-12-01,08PM,12/01/2023,07:00(ET),ORL@BKN,Lonnie WalkerIV,Brooklyn Nets,Out
+2023-12-01,08PM,12/01/2023,07:00(ET),ORL@BKN,Dariq Whitehead,Brooklyn Nets,Out
+2023-12-01,08PM,12/01/2023,07:00(ET),ORL@BKN,Jalen Wilson,Brooklyn Nets,Out
+2023-12-01,08PM,12/01/2023,08:00(ET),ATL@MIL,Kobe Bufkin,Atlanta Hawks,Out
+2023-12-01,08PM,12/01/2023,08:00(ET),ATL@MIL,Mouhamed Gueye,Atlanta Hawks,Out
+2023-12-01,08PM,12/01/2023,08:00(ET),ATL@MIL,Jalen Johnson,Atlanta Hawks,Out
+2023-12-01,08PM,12/01/2023,08:00(ET),ATL@MIL,Seth Lundy,Atlanta Hawks,Out
+2023-12-01,08PM,12/01/2023,08:00(ET),ATL@MIL,Miles Norris,Atlanta Hawks,Out
+2023-12-01,08PM,12/01/2023,08:00(ET),ATL@MIL,Marques Bolden,Milwaukee Bucks,Available
+2023-12-01,08PM,12/01/2023,08:00(ET),ATL@MIL,Pat Connaughton,Milwaukee Bucks,Out
+2023-12-01,08PM,12/01/2023,08:00(ET),ATL@MIL,Jae Crowder,Milwaukee Bucks,Out
+2023-12-01,08PM,12/01/2023,08:00(ET),ATL@MIL,Andre JacksonJr.,Milwaukee Bucks,Questionable
+2023-12-01,08PM,12/01/2023,08:00(ET),ATL@MIL,TyTy WashingtonJr.,Milwaukee Bucks,Available
+2023-12-01,08PM,12/01/2023,08:00(ET),ATL@MIL,Lindell Wigginton,Milwaukee Bucks,Available
+2023-12-01,08PM,12/01/2023,08:00(ET),IND@MIA,Kendall Brown,Indiana Pacers,Questionable
+2023-12-01,08PM,12/01/2023,08:00(ET),IND@MIA,Tyrese Haliburton,Indiana Pacers,Questionable
+2023-12-01,08PM,12/01/2023,08:00(ET),IND@MIA,Jalen Smith,Indiana Pacers,Out
+2023-12-01,08PM,12/01/2023,08:00(ET),IND@MIA,Oscar Tshiebwe,Indiana Pacers,Questionable
+2023-12-01,08PM,12/01/2023,08:00(ET),IND@MIA,Isaiah Wong,Indiana Pacers,Questionable
+2023-12-01,08PM,12/01/2023,08:00(ET),IND@MIA,Bam Adebayo,Miami Heat,Out
+2023-12-01,08PM,12/01/2023,08:00(ET),IND@MIA,Jimmy Butler,Miami Heat,Probable
+2023-12-01,08PM,12/01/2023,08:00(ET),IND@MIA,R.J. Hampton,Miami Heat,Out
+2023-12-01,08PM,12/01/2023,08:00(ET),IND@MIA,Tyler Herro,Miami Heat,Out
+2023-12-01,08PM,12/01/2023,08:00(ET),IND@MIA,Haywood Highsmith,Miami Heat,Available
+2023-12-01,08PM,12/01/2023,08:00(ET),IND@MIA,Duncan Robinson,Miami Heat,Available
+2023-12-01,08PM,12/01/2023,08:00(ET),IND@MIA,Dru Smith,Miami Heat,Out
+2023-12-01,08PM,12/01/2023,08:00(ET),NOP@CHI,NOT YET SUBMITTED,New Orleans Pelicans,NOT YET SUBMITTED
+2023-12-01,08PM,12/01/2023,08:00(ET),NOP@CHI,Lonzo Ball,Chicago Bulls,Out
+2023-12-01,08PM,12/01/2023,08:00(ET),NOP@CHI,Onuralp Bitim,Chicago Bulls,Out
+2023-12-01,08PM,12/01/2023,08:00(ET),NOP@CHI,DeMar DeRozan,Chicago Bulls,Questionable
+2023-12-01,08PM,12/01/2023,08:00(ET),NOP@CHI,Zach LaVine,Chicago Bulls,Out
+2023-12-01,08PM,12/01/2023,08:00(ET),NOP@CHI,Justin Lewis,Chicago Bulls,Out
+2023-12-01,08PM,12/01/2023,08:00(ET),NOP@CHI,Adama Sanogo,Chicago Bulls,Out
+2023-12-01,08PM,12/01/2023,09:00(ET),MEM@PHX,NOT YET SUBMITTED,Memphis Grizzlies,NOT YET SUBMITTED
+2023-12-01,08PM,12/01/2023,09:00(ET),MEM@PHX,NOT YET SUBMITTED,Phoenix Suns,NOT YET SUBMITTED
+2023-12-01,08PM,12/01/2023,09:00(ET),OKC@DAL,Ousmane Dieng,Oklahoma City Thunder,Out
+2023-12-01,08PM,12/01/2023,09:00(ET),OKC@DAL,Keyontae Johnson,Oklahoma City Thunder,Out
+2023-12-01,08PM,12/01/2023,09:00(ET),OKC@DAL,NOT YET SUBMITTED,Dallas Mavericks,NOT YET SUBMITTED
+2023-12-01,08PM,12/01/2023,09:30(ET),POR@UTA,Ibou Badji,Portland Trail Blazers,Questionable
+2023-12-01,08PM,12/01/2023,09:30(ET),POR@UTA,Justin Minaya,Portland Trail Blazers,Questionable
+2023-12-01,08PM,12/01/2023,09:30(ET),POR@UTA,Rayan Rupert,Portland Trail Blazers,Questionable
+2023-12-01,08PM,12/01/2023,09:30(ET),POR@UTA,Anfernee Simons,Portland Trail Blazers,Out
+2023-12-01,08PM,12/01/2023,09:30(ET),POR@UTA,Ish Wainright,Portland Trail Blazers,Out
+2023-12-01,08PM,12/01/2023,09:30(ET),POR@UTA,Robert WilliamsIII,Portland Trail Blazers,Out
+2023-12-01,08PM,12/01/2023,09:30(ET),POR@UTA,Josh Christopher,Utah Jazz,Out
+2023-12-01,08PM,12/01/2023,09:30(ET),POR@UTA,Jordan Clarkson,Utah Jazz,Out
+2023-12-01,08PM,12/01/2023,09:30(ET),POR@UTA,Kris Dunn,Utah Jazz,Out
+2023-12-01,08PM,12/01/2023,09:30(ET),POR@UTA,Taylor Hendricks,Utah Jazz,Out
+2023-12-01,08PM,12/01/2023,09:30(ET),POR@UTA,Johnny Juzang,Utah Jazz,Out
+2023-12-01,08PM,12/01/2023,09:30(ET),POR@UTA,Lauri Markkanen,Utah Jazz,Out
+2023-12-01,08PM,12/01/2023,09:30(ET),POR@UTA,Kelly Olynyk,Utah Jazz,Questionable
+2023-12-01,08PM,12/01/2023,09:30(ET),POR@UTA,Micah Potter,Utah Jazz,Out
+2023-12-01,08PM,12/01/2023,09:30(ET),POR@UTA,Brice Sensabaugh,Utah Jazz,Out
+2023-12-01,08PM,12/01/2023,10:00(ET),DEN@SAC,NOT YET SUBMITTED,Denver Nuggets,NOT YET SUBMITTED
+2023-12-01,08PM,12/01/2023,10:00(ET),DEN@SAC,Alex Len,Sacramento Kings,Out
+2023-12-01,08PM,12/01/2023,10:00(ET),DEN@SAC,Trey Lyles,Sacramento Kings,Available
+2023-12-01,08PM,12/01/2023,10:00(ET),DEN@SAC,Keegan Murray,Sacramento Kings,Questionable
+2023-12-01,08PM,12/01/2023,10:30(ET),HOU@LAL,Victor Oladipo,Houston Rockets,Out
+2023-12-01,08PM,12/01/2023,10:30(ET),HOU@LAL,Amen Thompson,Houston Rockets,Out
+2023-12-01,08PM,12/01/2023,10:30(ET),HOU@LAL,Anthony Davis,Los Angeles Lakers,Probable
+2023-12-01,08PM,12/01/2023,10:30(ET),HOU@LAL,Jaxson Hayes,Los Angeles Lakers,Probable
+2023-12-01,08PM,12/01/2023,10:30(ET),HOU@LAL,LeBron James,Los Angeles Lakers,Questionable
+2023-12-01,08PM,12/01/2023,10:30(ET),HOU@LAL,Cam Reddish,Los Angeles Lakers,Probable
+2023-12-01,08PM,12/01/2023,10:30(ET),HOU@LAL,Gabe Vincent,Los Angeles Lakers,Out
+2023-12-03,05PM,12/04/2023,07:30(ET),BOS@IND,Kristaps Porzingis,Boston Celtics,Out
+2023-12-03,05PM,12/04/2023,07:30(ET),BOS@IND,Jordan Walsh,Boston Celtics,Out
+2023-12-03,05PM,12/04/2023,07:30(ET),BOS@IND,Kendall Brown,Indiana Pacers,Questionable
+2023-12-03,05PM,12/04/2023,07:30(ET),BOS@IND,Tyrese Haliburton,Indiana Pacers,Questionable
+2023-12-03,05PM,12/04/2023,07:30(ET),BOS@IND,Jalen Smith,Indiana Pacers,Out
+2023-12-03,05PM,12/04/2023,07:30(ET),BOS@IND,Obi Toppin,Indiana Pacers,Questionable
+2023-12-03,05PM,12/04/2023,07:30(ET),BOS@IND,Oscar Tshiebwe,Indiana Pacers,Questionable
+2023-12-03,05PM,12/04/2023,07:30(ET),BOS@IND,Isaiah Wong,Indiana Pacers,Questionable
+2023-12-03,05PM,12/03/2023,10:00(ET),NOP@SAC,NOT YET SUBMITTED,New Orleans Pelicans,NOT YET SUBMITTED
+2023-12-03,05PM,12/03/2023,10:00(ET),NOP@SAC,NOT YET SUBMITTED,Sacramento Kings,NOT YET SUBMITTED
