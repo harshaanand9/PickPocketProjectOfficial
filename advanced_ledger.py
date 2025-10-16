@@ -15,6 +15,23 @@ from nba_api.stats.endpoints import boxscoreadvancedv2
 from ledger_io import load_df, save_df, path_for, debug_where
 _KIND = "advanced"
 
+import os
+from pathlib import Path
+
+# repo root = folder that contains advanced_ledger.py
+REPO_ROOT = Path(__file__).resolve().parent
+
+# canonical location for these parquets (lowercase)
+ADVANCED_LEDGER_DIR = str(REPO_ROOT / "ledgers" / "advanced_ledger")
+
+# filenames on disk use an EN DASH between years; normalize "2013-14" -> "2013–14"
+def _season_fname(season: str) -> str:
+    return season.replace("-", "–")
+
+def _ledger_path(season: str) -> str:
+    return os.path.join(ADVANCED_LEDGER_DIR, f"{_season_fname(season)}.parquet")
+
+
 # in advanced_ledger.py, near the top where _LEDGER_TMP_ROOT is set
 _LEDGER_TMP_ROOT = os.environ.get(
     "NBA_LEDGER_TMP_ROOT",
@@ -97,6 +114,7 @@ def _fill_reb_pcts_for_game(df_adv: pd.DataFrame, season: str, game_id: str, lea
     except Exception:
         # never break the pipeline on fill; return original
         return df_adv
+
 
 
 def get_ledger(
@@ -542,6 +560,107 @@ def ensure_advanced_for_matchup(season: str, cutoff_date):
         _team_adv_slice.cache_clear()
     except Exception:
         pass
+
+def ensure_possessions(season: str, cutoff_date: str | None = None, *, verbose: bool = True) -> None:
+    """
+    Backfill missing POSS in this season's advanced ledger using ONLY
+    BoxScoreAdvancedV2 TEAM table. Prints progress per game_id.
+    """
+    import numpy as np
+    import pandas as pd
+
+    led = _load_ledger(season)
+    if led is None or led.empty:
+        if verbose: print(f"[POSS] season={season} ledger empty; nothing to do")
+        return
+
+    # normalize core ids
+    led["GAME_ID"] = led["GAME_ID"].astype(str).str.zfill(10)
+    led["TEAM_ID"] = pd.to_numeric(led["TEAM_ID"], errors="coerce")
+
+    # ensure POSS column exists (numeric)
+    if "POSS" not in led.columns:
+        led["POSS"] = np.nan
+    led["POSS"] = pd.to_numeric(led["POSS"], errors="coerce")
+
+    # optional cutoff filter (only affects what we attempt to fill)
+    work_mask = pd.Series(True, index=led.index)
+    if cutoff_date is not None and "GAME_DATE" in led.columns:
+        cd = pd.to_datetime(cutoff_date, errors="coerce").normalize()
+        work_mask &= (pd.to_datetime(led["GAME_DATE"], errors="coerce").dt.normalize() <= cd)
+
+    # which pairs need filling?
+    need_pairs = led.loc[work_mask & led["POSS"].isna(), ["GAME_ID", "TEAM_ID"]].drop_duplicates()
+    if need_pairs.empty:
+        if verbose: print(f"[POSS] season={season} nothing missing; done")
+        return
+
+    total_games_touched = 0
+    total_rows_filled = 0
+    touched_teams: set[int] = set()
+
+    for gid in need_pairs["GAME_ID"].unique():
+        # rows still missing for this game
+        m = (led["GAME_ID"] == gid) & led["POSS"].isna()
+        if not m.any():
+            continue
+
+        try:
+            team_df = get_advanced_team_game_rows(gid)  # 2-row TEAM table, has POSS
+        except Exception as e:
+            if verbose: print(f"[POSS] game_id={gid} skipped (endpoint error: {e})")
+            continue
+
+        if "POSS" not in team_df.columns:
+            if verbose: print(f"[POSS] game_id={gid} returned without POSS; skipped")
+            continue
+
+        # map by TEAM_ID → POSS
+        poss_map = (
+            team_df[["TEAM_ID", "POSS"]]
+            .dropna(subset=["TEAM_ID"])
+            .astype({"TEAM_ID": "int64"})
+            .set_index("TEAM_ID")["POSS"]
+        )
+
+        before_missing = m.sum()
+        for i in led.index[m]:
+            tid = int(led.at[i, "TEAM_ID"])
+            if tid in poss_map.index and pd.notna(poss_map.loc[tid]):
+                led.at[i, "POSS"] = float(poss_map.loc[tid])
+                touched_teams.add(tid)
+
+        after_missing = ((led["GAME_ID"] == gid) & led["POSS"].isna()).sum()
+        filled_here = before_missing - after_missing
+        if filled_here > 0:
+            total_games_touched += 1
+            total_rows_filled += filled_here
+            if verbose:
+                print(f"[POSS] filled game_id={gid} rows={filled_here}")
+        else:
+            if verbose:
+                print(f"[POSS] game_id={gid} no rows filled (already complete or API had NaNs)")
+
+    if total_rows_filled == 0:
+        if verbose: print(f"[POSS] season={season} completed (no changes written)")
+        return
+
+    # recompute priors only for teams we touched
+    chunks = []
+    for tid in touched_teams:
+        chunks.append(_recompute_team(led, int(tid)))
+    keep = ~led["TEAM_ID"].isin(list(touched_teams))
+    led = pd.concat([led.loc[keep], *chunks], ignore_index=True)
+    led = led.sort_values(["TEAM_ID", "GAME_DATE", "GAME_ID"]).reset_index(drop=True)
+
+    _save_ledger(season, led)
+    try:
+        _team_adv_slice.cache_clear()
+    except Exception:
+        pass
+
+    if verbose:
+        print(f"[POSS] season={season} done | games_touched={total_games_touched} rows_filled={total_rows_filled}")
 
 
 # -------------------- ensure (single game / matchup) --------------------

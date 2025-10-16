@@ -245,35 +245,80 @@ def _load_team_parquet(output_dir: str, team_id: int) -> pd.DataFrame:
     path = os.path.join(output_dir, f"elo_team_{team_id}.parquet")
     return pd.read_parquet(path)
 
-def get_elo_for_game(output_dir: str, team_id: int, game_id: str) -> Tuple[float, float]:
+# === BEGIN ELO PATH/LOADER CONFIG (AWS-safe) ===
+import os
+from pathlib import Path
+from functools import lru_cache
+import pandas as pd
+from datetime import datetime
+
+# repo root = two levels up from THIS file (…/repo/ledgers/elo_team_ledger.py -> repo)
+_REPO_ROOT = Path(__file__).resolve().parents[1]
+
+# default relative dir (works locally if you don't set env)
+_ELO_DIR_DEFAULT = _REPO_ROOT / "data" / "elo_ledgers_by_team"
+
+# env override for AWS (recommended): export NBA_ELO_DIR=/abs/path/on/host
+ELO_DIR = Path(os.getenv("NBA_ELO_DIR", str(_ELO_DIR_DEFAULT))).expanduser().resolve()
+
+@lru_cache(maxsize=64)
+def _load_team_elo_df(team_id: int) -> pd.DataFrame:
     """
-    O(1) (hash lookup) on the in-memory dataframe row after a single parquet load per team_id.
-    Returns (ELO_PRE, ELO_POST) for (team_id, game_id).
+    Load one team's ELO table from ELO_DIR.
+    Accepts .parquet or .csv: elo_team_{team_id}.parquet / .csv
+    Must contain columns for GAME_ID, ELO_PRE, ELO_POST (case-insensitive handled).
     """
-    df = _load_team_parquet(output_dir, team_id)
-    row = df.loc[df["GAME_ID"] == game_id]
+    base = ELO_DIR / f"elo_team_{team_id}"
+    pq = base.with_suffix(".parquet")
+    csv = base.with_suffix(".csv")
+
+    if pq.exists():
+        df = pd.read_parquet(pq)
+    elif csv.exists():
+        df = pd.read_csv(csv)
+    else:
+        raise FileNotFoundError(f"Missing ELO ledger for team {team_id}: {pq} or {csv}")
+
+    # normalize columns
+    rename = {
+        "elo_pre": "ELO_PRE", "elo_post": "ELO_POST",
+        "season": "SEASON", "game_id": "GAME_ID"
+    }
+    df = df.rename(columns={k: v for k, v in rename.items() if k in df.columns})
+    req = {"GAME_ID", "ELO_PRE", "ELO_POST"}
+    missing = req - set(df.columns)
+    if missing:
+        raise KeyError(f"ELO ledger for team {team_id} missing columns: {missing}")
+
+    if "GAME_DATE" in df.columns and not pd.api.types.is_datetime64_any_dtype(df["GAME_DATE"]):
+        df["GAME_DATE"] = pd.to_datetime(df["GAME_DATE"], errors="coerce")
+    df["GAME_ID"] = df["GAME_ID"].astype(str)
+    return df
+
+def _elo_for_game(team_id: int, game_id: str) -> tuple[float, float]:
+    """
+    Return (ELO_PRE, ELO_POST) for this team & GAME_ID.
+    """
+    df = _load_team_elo_df(team_id)
+    row = df.loc[df["GAME_ID"] == str(game_id)]
     if row.empty:
-        raise KeyError(f"No Elo row for TEAM_ID={team_id} GAME_ID={game_id}")
+        raise KeyError(f"No ELO row for TEAM_ID={team_id} GAME_ID={game_id}")
     r = row.iloc[0]
     return float(r["ELO_PRE"]), float(r["ELO_POST"])
 
+def _season_from_date_str(date_str: str) -> str:
+    """
+    Derive NBA season label 'YYYY-YY' from a calendar date string 'MM/DD/YYYY'.
+    Aug–Dec -> Y–(Y+1); Jan–Jul -> (Y-1)–Y
+    """
+    d = datetime.strptime(date_str, "%m/%d/%Y")
+    y = d.year
+    if d.month >= 8:
+        return f"{y}-{str((y+1)%100).zfill(2)}"
+    else:
+        return f"{y-1}-{str(y%100).zfill(2)}"
 
 
-import os, glob
-from functools import lru_cache
-from datetime import datetime
-import pandas as pd
-
-from stats_getter import canon_team, get_league_game_log
-
-import os, glob
-from functools import lru_cache
-from datetime import datetime
-import pandas as pd
-
-from stats_getter import canon_team, get_league_game_log
-
-ELO_DIR_DEFAULT = "data/elo_ledgers_by_team"
 
 @lru_cache(maxsize=64)
 def _load_team_parquet(output_dir: str, team_id: int) -> pd.DataFrame:
@@ -291,7 +336,7 @@ def _season_from_date(d: datetime) -> str:
 
 def _resolve_game_id_for_date(home_team: str, away_team: str, d: datetime) -> str | None:
     season = _season_from_date(d)
-    lg = get_league_game_log(season).copy()
+    lg = sg.get_league_game_log(season).copy()
     lg["GAME_DATE"] = pd.to_datetime(lg["GAME_DATE"]).dt.normalize()
     dn = pd.to_datetime(d).normalize()
 
@@ -359,54 +404,46 @@ def _elo_as_of_date(output_dir: str, team_id: int, d: datetime) -> float:
     first = df.iloc[0]
     return float(first["ELO_PRE"])
 
-def get_ELO_home(home_team: str, away_team: str, date, output_dir: str = ELO_DIR_DEFAULT) -> float:
+from typing import Tuple
+import stats_getter as sg
+
+
+
+# Feature helpers: return PRE-game ELO as a scalar
+from typing import Optional
+import stats_getter as sg  # must provide: canon_team, get_team_id, get_game_id
+
+def _elo_home(home_team: str, away_team: str, date_str: str) -> float:
     """
-    Pre-game Elo for the home team on `date`:
-      - If the teams play that day, returns that row's ELO_PRE.
-      - Otherwise, returns Elo as of the start of `date` (all games strictly before date).
+    PRE-game ELO for the HOME team on (date_str).
+    Signature matches: try_feature('elo_home', _elo_home, home_team, away_team, date_str)
     """
-    d = date if isinstance(date, pd.Timestamp) else (
-        pd.to_datetime(date) if isinstance(date, str) else pd.to_datetime(date)
-    )
-    home_team = canon_team(home_team)
-    away_team = canon_team(away_team)
+    # canonicalize names (your sg.canon_team already does this in your codebase)
+    home = sg.canon_team(home_team)
+    season = _season_from_date_str(date_str)
 
-    season = _season_from_date(d)
-    gid = _resolve_game_id_for_date(home_team, away_team, d)
+    # resolve GAME_ID using your cached league log helper
+    game_id = sg.get_game_id(home, season, date_str)  # returns 10-char GAME_ID string
+    team_id = sg.get_team_id(home)
 
-    team_id = _team_id_from_log(home_team, season)
-    df = _load_team_parquet(output_dir, team_id)
+    elo_pre, _ = _elo_for_game(team_id, game_id)
+    return elo_pre
 
-    if gid is not None:
-        row = df.loc[df["GAME_ID"].astype(str) == str(gid)]
-        if not row.empty:
-            return float(row.iloc[0]["ELO_PRE"])
-
-    # Fallback: Elo 'as of' the start of the date
-    return _elo_as_of_date(output_dir, team_id, d)
-
-def get_ELO_away(home_team: str, away_team: str, date, output_dir: str = ELO_DIR_DEFAULT) -> float:
+def _elo_away(home_team: str, away_team: str, date_str: str) -> float:
     """
-    Pre-game Elo for the away team on `date` (same semantics as get_ELO_home).
+    PRE-game ELO for the AWAY team on (date_str).
+    Signature matches: try_feature('elo_away', _elo_away, home_team, away_team, date_str)
     """
-    d = date if isinstance(date, pd.Timestamp) else (
-        pd.to_datetime(date) if isinstance(date, str) else pd.to_datetime(date)
-    )
-    home_team = canon_team(home_team)
-    away_team = canon_team(away_team)
+    away = sg.canon_team(away_team)
+    season = _season_from_date_str(date_str)
+    game_id = sg.get_game_id(sg.canon_team(home_team), season, date_str)
+    team_id = sg.get_team_id(away)
 
-    season = _season_from_date(d)
-    gid = _resolve_game_id_for_date(home_team, away_team, d)
+    elo_pre, _ = _elo_for_game(team_id, game_id)
+    return elo_pre
 
-    team_id = _team_id_from_log(away_team, season)
-    df = _load_team_parquet(output_dir, team_id)
 
-    if gid is not None:
-        row = df.loc[df["GAME_ID"].astype(str) == str(gid)]
-        if not row.empty:
-            return float(row.iloc[0]["ELO_PRE"])
 
-    return _elo_as_of_date(output_dir, team_id, d)
 
 
 # ---- Seeds loader for starting 2013-14 from 2012-13 FINAL Elo ----

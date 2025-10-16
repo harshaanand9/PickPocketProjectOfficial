@@ -9,8 +9,20 @@ import hustle_ledger
 import misc_ledger
 from misc_ledger import append_misc_game
 from FourFactors_ledger import append_FourFactors_game  # or append_fourfactors_game
-from elo_team_ledger import get_ELO_home as _elo_home, get_ELO_away as _elo_away
+from elo_team_ledger import _elo_home, _elo_away
  # 14435 total data points
+
+ # at top of training_set_loader_copy.py
+from pathlib import Path
+import os
+
+# Resolve a stable output directory:
+# 1) OUT_FEATURES_DIR env var (recommended on AWS)
+# 2) fallback: repo_root/out_features (repo_root = folder containing this file)
+_REPO_ROOT = Path(__file__).resolve().parent
+OUT_DIR = Path(os.getenv("OUT_FEATURES_DIR", _REPO_ROOT / "out_features")).expanduser().resolve()
+OUT_DIR.mkdir(parents=True, exist_ok=True)
+
  
  
 
@@ -715,53 +727,45 @@ def load_all_features(seasons=None, output_file='nba_features_2015_2025.csv'):
     Load all 52 features for NBA games from 2015-16 through 2024-25
     """
     if seasons is None:
-        seasons = ['2013-14','2014-15', '2015-16', '2016-17', '2017-18', '2018-19', '2019-20', 
-                   '2020-21', '2021-22', '2022-23', '2023-24', '2024-25']
-        
+        seasons = ['2013-14','2014-15','2015-16','2016-17','2017-18','2018-19',
+                   '2019-20','2020-21','2021-22','2022-23','2023-24','2024-25']
+
     seasons = _seasons_from_env(seasons)
-    # Initialize results DataFrame
     all_features_df = initialize_features_dataframe()
-    
-    # Process each season
+
+    out_path = (OUT_DIR / output_file).resolve()
+    temp_path = Path(str(out_path) + ".temp")
+
     for season in seasons:
-        print(f"\n{'='*50}")
+        print("\n" + "="*50)
         print(f"Processing season: {season}")
-        print(f"{'='*50}")
-        
+        print("="*50)
+
         try:
             season_features = process_season(season)
-            all_features_df = pd.concat([all_features_df, season_features], 
-                                       ignore_index=True)
-            
-            # Save intermediate results after each season
-            all_features_df.to_csv(f'{output_file}.temp', index=False)
-            print(f"âœ… Completed {season} - {len(season_features)} games processed")
-            
+            all_features_df = pd.concat([all_features_df, season_features], ignore_index=True)
+
+            # write incremental checkpoint next to the final file
+            all_features_df.to_csv(temp_path, index=False)
+            print(f"✓ Completed {season} - {len(season_features)} games processed")
+
         except Exception as e:
             import traceback
-
-            # 1) Print the full stack trace (most helpful)
-            print(f"âŒ Error processing {season}: {e}")
+            print(f"✗ Error processing {season}: {e}")
             traceback.print_exc()
-
-            # 2) Also print the *origin* of the exception (deepest frame)
             tb = e.__traceback__
-            while tb.tb_next:          # walk to the last frame
+            while tb.tb_next:
                 tb = tb.tb_next
             frame = tb.tb_frame
-            func  = frame.f_code.co_name
-            file  = frame.f_code.co_filename
-            line  = tb.tb_lineno
-            print(f"â†³ Origin: {func} at {file}:{line}")
-
+            print(f"↳ Origin: {frame.f_code.co_name} at {frame.f_code.co_filename}:{tb.tb_lineno}")
             continue
-    
-    # Save final results
-    all_features_df.to_csv(output_file, index=False)
-    print(f"\nâœ… All features saved to {output_file}")
+
+    all_features_df.to_csv(out_path, index=False)
+    print(f"\n✓ All features saved to {out_path}")
     print(f"Total games processed: {len(all_features_df)}")
-    
+
     return all_features_df
+
 
 def process_season(season, mutate_ledgers: bool = True):
     import os
