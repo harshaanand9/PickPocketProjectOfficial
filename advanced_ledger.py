@@ -17,32 +17,8 @@ _KIND = "advanced"
 
 import os
 from pathlib import Path
+from ledger_io import ROOT
 
-# repo root = folder that contains advanced_ledger.py
-REPO_ROOT = Path(__file__).resolve().parent
-
-# canonical location for these parquets (lowercase)
-ADVANCED_LEDGER_DIR = str(REPO_ROOT / "ledgers" / "advanced_ledger")
-
-# filenames on disk use an EN DASH between years; normalize "2013-14" -> "2013–14"
-def _season_fname(season: str) -> str:
-    return season.replace("-", "–")
-
-def _ledger_path(season: str) -> str:
-    return os.path.join(ADVANCED_LEDGER_DIR, f"{_season_fname(season)}.parquet")
-
-
-# in advanced_ledger.py, near the top where _LEDGER_TMP_ROOT is set
-_LEDGER_TMP_ROOT = os.environ.get(
-    "NBA_LEDGER_TMP_ROOT",
-    "/home/ubuntu/PickPocketProjectOfficial/ledgers"
-)
-
-_WORKER = os.environ.get("NBA_WORKER", "").strip().upper()
-if _WORKER:
-    _LEDGER_TMP_ROOT = f"{_LEDGER_TMP_ROOT}/process_{_WORKER}"
-
-# Reuse your existing season/date/game-id helpers & league log
 
 from stats_getter import (
     NBA_TIMEOUT,
@@ -234,10 +210,6 @@ def _normalize_day(x):
     if isinstance(v, pd.DatetimeIndex): return v.normalize()
     return pd.Timestamp(v).normalize()
 
-def _path(season: str) -> Path:
-    p = Path(_LEDGER_TMP_ROOT) / f"advanced_{season}.parquet"
-    p.parent.mkdir(parents=True, exist_ok=True)
-    return p
 
 def where():
     debug_where(_KIND)
@@ -1140,9 +1112,6 @@ def _lastN_adv_mean(season: str, team_id: int, date_key: str, metric: str, N: in
     return float(vals.mean())
 
 
-
-if __name__ == "__main__":
-    print(f"[{__file__}] writing ledgers to: {_LEDGER_TMP_ROOT}")
 
 
 

@@ -4,20 +4,38 @@ import os, re, glob
 from pathlib import Path
 import pandas as pd
 
-def _project_root() -> Path:
-    return Path(os.environ.get(
-        "PICKPOCKET_DATA",
-        Path(__file__).resolve().parents[1] / "data"   # <repo>/data by default
-    )).resolve()
 
-ROOT = _project_root()
+DATA_ROOT = Path(os.environ.get("PICKPOCKET_DATA", Path.cwd() / "data"))
+ROOT = DATA_ROOT
+
+def _season_fname(season: str) -> str:
+    """
+    '2013-14' → '201314.parquet'
+    also accepts '201314' or '201314.parquet'
+    """
+    s = str(season).strip().replace("–", "-").replace("—", "-")
+    if "-" in s and len(s) >= 7:
+        return f"{s[:4]}{s[-2:]}.parquet"
+    t = re.sub(r"\D", "", s)            # keep digits only
+    if len(t) == 6:
+        return f"{t}.parquet"
+    raise ValueError(f"Bad season label: {season}")
+
 FOLDERS = {
-    "advanced":      ROOT / "advanced_ledger",
-    "four_factors":  ROOT / "four_factors_ledger",
-    "misc":          ROOT / "misc_ledger",
-    "hustle":        ROOT / "hustle_ledger",
+    "advanced":      DATA_ROOT / "advanced_ledger",
+    "four_factors":  DATA_ROOT / "four_factors_ledger",
+    "misc":          DATA_ROOT / "misc_ledger",
+    "hustle":        DATA_ROOT / "hustle_ledger",
 }
 for p in FOLDERS.values(): p.mkdir(parents=True, exist_ok=True)
+
+
+# replace path_for with migration-aware version
+def path_for(kind: str, season: str) -> Path:
+    d = DATA_ROOT / f"{kind}_ledger"
+    d.mkdir(parents=True, exist_ok=True)
+    return d / _season_fname(season)
+
 
 def season_norm(s: str) -> str:
     import re
@@ -26,10 +44,6 @@ def season_norm(s: str) -> str:
     m = re.match(r"^(\d{4})[-_](\d{4})$", s)
     if m: return f"{m.group(1)}-{m.group(2)[2:]}"
     return s
-
-def path_for(kind: str, season: str) -> Path:
-    kind = kind.lower()
-    return FOLDERS[kind] / f"{season_norm(season)}.parquet"
 
 def save_df(kind: str, season: str, df: pd.DataFrame) -> Path:
     out = path_for(kind, season)

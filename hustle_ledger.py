@@ -15,14 +15,6 @@ _KIND = "hustle"
 
 # -------------------- config --------------------
 
-_LEDGER_TMP_ROOT = os.environ.get("NBA_LEDGER_TMP_ROOT", "ledgers_tmp")
-_WORKER = os.environ.get("NBA_WORKER", "").strip().upper()
-if _WORKER:
-    _LEDGER_TMP_ROOT = f"{_LEDGER_TMP_ROOT}/process_{_WORKER}"
-    
-CACHE_DIR = Path(".cache")
-CACHE_DIR.mkdir(exist_ok=True)
-
 # NOTE: STOCKS removed from the hustle ledger — no longer pulled from HustleStatsBoxScore.
 HUSTLE_METRICS: Sequence[str] = (
     "DEFLECTIONS",
@@ -106,10 +98,7 @@ def get_ledger(
     return out
 
 
-def _p(season: str) -> Path:
-    p = Path(_LEDGER_TMP_ROOT) / f"hustle_{season}.parquet"
-    p.parent.mkdir(parents=True, exist_ok=True)
-    return p
+
 
 def _norm_day(x):
     v = pd.to_datetime(x, errors="coerce")
@@ -298,7 +287,3 @@ def get_prior_deflections_pg(season: str, team_id: int, game_date) -> float:
 
 def get_prior_screen_assists_pg(season: str, team_id: int, game_date) -> float:
     return _prior_mean(season, team_id, game_date, "SCREEN_ASSISTS")
-
-
-if __name__ == "__main__":
-    print(f"[{__file__}] writing ledgers to: {_LEDGER_TMP_ROOT}")

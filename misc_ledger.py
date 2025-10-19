@@ -110,15 +110,7 @@ def get_ledger_rows_for_game(season: str, game_id: str):
     out = df[df["GAME_ID"].astype(str) == gid].copy()
     return out
 
-# -------------------- config & helpers --------------------
 
-_LEDGER_TMP_ROOT = os.environ.get("NBA_LEDGER_TMP_ROOT", "ledgers_tmp")
-_WORKER = os.environ.get("NBA_WORKER", "").strip().upper()
-if _WORKER:
-    _LEDGER_TMP_ROOT = f"{_LEDGER_TMP_ROOT}/process_{_WORKER}"
-    
-CACHE_DIR = Path(".cache")
-CACHE_DIR.mkdir(exist_ok=True)
 
 MISC_METRICS: Sequence[str] = (
     "PTS_OFF_TOV",      # points off turnovers (team)
@@ -126,11 +118,6 @@ MISC_METRICS: Sequence[str] = (
     "PTS_2ND_CHANCE",   # 2nd chance points
 
 )
-
-def _path(season: str) -> Path:
-    p = Path(_LEDGER_TMP_ROOT) / f"misc_{season}.parquet"
-    p.parent.mkdir(parents=True, exist_ok=True)
-    return p
 
 def _normalize_day(x):
     v = pd.to_datetime(x, errors="coerce")
@@ -453,6 +440,3 @@ def get_second_chance_pts_per_100(team_name: str,
     return float(pts) / float(poss_pg) * 100.0
 
 
-
-if __name__ == "__main__":
-    print(f"[{__file__}] writing ledgers to: {_LEDGER_TMP_ROOT}")

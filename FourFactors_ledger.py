@@ -23,25 +23,9 @@ from stats_getter import (
     team_regular_season_range_by_id,   # (team_id, season) -> (date_from, date_to)
 )
 
-_LEDGER_TMP_ROOT = os.environ.get("NBA_LEDGER_TMP_ROOT", "ledgers_tmp")
-
-
-_WORKER = os.environ.get("NBA_WORKER", "").strip().upper()
-if _WORKER:
-    _LEDGER_TMP_ROOT = f"{_LEDGER_TMP_ROOT}/process_{_WORKER}"
-
-# -------------------- config --------------------
-
-CACHE_DIR = Path(".cache")
-CACHE_DIR.mkdir(exist_ok=True)
-
 # TEAM-side Four Factors from BoxScoreFourFactorsV2
 FF_METRICS: Sequence[str] = ("EFG_PCT", "FTA_RATE", "TM_TOV_PCT", "OREB_PCT")
 
-def _path(season: str) -> Path:
-    p = Path(_LEDGER_TMP_ROOT) / f"fourfactors_{season}.parquet"
-    p.parent.mkdir(parents=True, exist_ok=True)
-    return p
 
 def _normalize_ff_cols(df: pd.DataFrame, cols=("OREB_PCT",)) -> pd.DataFrame:
     """
@@ -534,6 +518,3 @@ def get_last_season_TMV_TOV_PCT(team_name: str, date_str: str) -> float:
     return get_last_season_ff_metric(team_name, date_str, "TM_TOV_PCT")
 
 
-
-if __name__ == "__main__":
-    print(f"[{__file__}] writing ledgers to: {_LEDGER_TMP_ROOT}")
