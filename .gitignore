@@ -18,3 +18,7 @@ logs/
 # If you do NOT want to track ledgers via Git:
 # ledgers/
 
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
