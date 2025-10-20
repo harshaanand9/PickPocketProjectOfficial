@@ -98,6 +98,12 @@ import os
 
 # 1) Put your full pool here (or set env NBA_PROXY_POOL_ALL as a CSV)
 #    Example shows the style of your screenshot; paste the whole list.
+
+class FeatureTimeoutError(RuntimeError):
+    """Raised when a stats call timed out after all retries."""
+    pass
+
+
 POOL_ALL = [
     "DIRECT",
     "http://spbi6ee2j0:jD7Pk~5fMlcV4ty2bt@dc.decodo.com:10011",
@@ -398,10 +404,13 @@ def _retry_nba(fetch_fn, *, endpoint: str, timeout: float | None = None, retries
 
             back = min(NBA_BACKOFF_CAP, 1.0 * (2 ** attempt))
             _sleep_with_jitter(back)
-
-
-    # out of retries or hit a non-retryable error
+    
+    if _is_retryable(last_err) and "timeout" in str(last_err).lower():
+        raise FeatureTimeoutError(f"{endpoint} timed out after {max_tries} attempts: {last_err}") from last_err
+    
     raise last_err
+
+
 
 
 # --- stats_getter.py ---

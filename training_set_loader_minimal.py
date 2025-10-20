@@ -364,8 +364,12 @@ def process_season(season: str, mutate_ledgers: bool = True) -> pd.DataFrame:
         except KeyboardInterrupt:
             print("\n[graceful-exit] stopping…")
             raise
+        except sg.FeatureTimeoutError as e:
+            print(f"[FATAL] Feature timeout at {away} @ {home} on {date_str}: {e}")
+            raise SystemExit(2)
         except Exception as e:
             print(f"⚠️  Skipped {away} @ {home} on {date_str} ({season}): {e}")
+
 
     # Return the season DataFrame loaded from CSV to keep columns consistent
     try:
